@@ -9,8 +9,9 @@ jobs:
       - uses: actions/checkout@v4
       - name: Unzip source if uploaded as zip
         run: |
-          if [ -f Nemesis-source.zip ]; then
-            unzip -o Nemesis-source.zip
+          ZIP=$(ls Nemesis-source*.zip 2>/dev/null | head -n 1)
+          if [ -n "$ZIP" ]; then
+            unzip -o "$ZIP"
             cp -r Nemesis/. .
           fi
       - uses: actions/setup-java@v4
